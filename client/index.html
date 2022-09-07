@@ -75,6 +75,18 @@
             console.log(n1.data);
             console.log(n1.quantidade);
             console.log(n1.valor);
+
+            var origem1 = {nome: 'Paulo'};
+            var origem2 = {sobrenome: 'Fulle'};
+
+            var copia = Object.assign({}, origem1, origem2);
+
+            console.log(copia);
+
+            var nome = 'Paulo';
+            var objeto = {nome: nome};
+            console.log(objeto);
+
         </script>
     </body>
 </html>
