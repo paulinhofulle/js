@@ -54,13 +54,13 @@
         <script src="app/domain/negociacao/negociacao.js"></script>
 
         <script>
-            var outroDia = new Date();
+            let outroDia = new Date();
             outroDia.setDate(22);
-            var n1 = new negociacao(outroDia, 10, 20);
+            let n1 = new negociacao(outroDia, 10, 20);
 
             outroDia.setDate(30);
 
-            var volume = n1.volume;
+            let volume = n1.volume;
 
             n1.quantidade = 30;
             console.log(n1.quantidade);
@@ -76,16 +76,37 @@
             console.log(n1.quantidade);
             console.log(n1.valor);
 
-            var origem1 = {nome: 'Paulo'};
-            var origem2 = {sobrenome: 'Fulle'};
+            let origem1 = {nome: 'Paulo'};
+            let origem2 = {sobrenome: 'Fulle'};
 
-            var copia = Object.assign({}, origem1, origem2);
+            let copia = Object.assign({}, origem1, origem2);
 
             console.log(copia);
 
-            var nome = 'Paulo';
-            var objeto = {nome: nome};
+            let nome = 'Paulo';
+            let objeto = {nome: nome};
             console.log(objeto);
+
+        
+            function getNome() {
+                var nome = 'Paulo';
+                alert(nome);
+
+                if(!nome){
+                    var nome = 'Paulo';
+                }
+            }
+
+            getNome();
+            alert(nome);
+
+            for(let i = 1; i <= 100; i++){
+                alert(nome);
+                let nome = 'Paulo';
+                console.log(i);
+            }
+            alert(nome);
+            alert(i);
 
         </script>
     </body>
