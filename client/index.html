@@ -9,6 +9,7 @@
     <body class="container">
         <h1 class="text-center">Negociações</h1>
 
+        <div id="mensagemView"></div>
         <form class="form">
             <div class="form-group">
                 <label for="data">Data</label>
@@ -44,7 +45,10 @@
         <script src="app/app.js"></script>
         <script src="app/ui/converters/DateConveter.js"></script>
         <script src="app/domain/negociacao/negociacoes.js"></script>
+        <script src="app/ui/views/View.js"></script>
         <script src="app/ui/views/negociacoesView.js"></script>
+        <script src="app/ui/models/Mensagem.js"></script>
+        <script src="app/ui/views/mensagemView.js"></script>
 
         <script>
             let outroDia = new Date();
