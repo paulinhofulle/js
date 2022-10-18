@@ -11,19 +11,17 @@ constructor(){
 adiciona(evento){
     event.preventDefault();
 
+    let converter = new DateConverter();
+
     console.log(typeof this._inputData.value.split('-'));
-    let data = new Date(...this._inputData.value.split('-')
-        .map((item, indice) => {
-            return item - (indice % 2);
-            if(indice == 1){
-                return item - 1;
-            }
-            return item;
-        })
-    );
+    let data = DateConverter.paraData(this._inputData.value);
     console.log(data);
-    let negociacao = new negociacao(data, this._inputQuantidade, this._inputValor);
-    
+    let negociacao = new negociacao(data, parseInt(this._inputQuantidade), parseInt(this._inputValor));
+
+    let diaMesAno = DateConverter.paraTexto(data);
+
+    console.log(diaMesAno);
+
 
     console.log('controller funcionando');
 
