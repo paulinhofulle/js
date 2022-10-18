@@ -6,59 +6,23 @@ class NegociacaoController{
         this._inputData = $("#data");
         this._inputQuantidade = $("#quantidade");
         this._inputValor = $("#valor");
-        this._negociacoes = new Proxy(new negociacoes(), {
-            get(target, prop, receiver){
-                if(typeof(target[prop] == typeof(Function)) && ['adiciona', 'esvazia'].includes(prop)){
-                    return function(){
-                        console.log(`${prop} disparou a armadilha`);
-                        target[prop].apply(target, arguments);
-
-                        this._negociacoesView.update(target);
-                    };
-                }
-                else{
-                    return target[prop];
-                }
-            },
-        });
-//        this._negociacoes = new negociacoes(function(model){
-//            console.log(this);
-//            this._negociacoesView.update(model);
-//        });
+        this._negociacoes = ProxyFactory.create(
+            new negociacoes(), ['adiciona', 'esvazia'], model => this._negociacoesView.update(model)
+        );
         this._negociacoesView = new this.negociacoesView("#negociacoes");
         this._negociacoesView.update(this._negociacoes);
 
-        this._mensagem = new Mensagem();
+        this._mensagem = ProxyFactory.create(new Mensagem(), ['texto'], model => this._mensagemView.update(model));
         this._mensagemView = new mensagemView("#mensagemView");
-        this._mensagemView.update(this.update);
+        this._mensagemView.update(this._mensagem);
     }    
 
     adiciona(evento){
         event.preventDefault();
-
-        let converter = new DateConverter();
-
-        console.log(typeof this._inputData.value.split('-'));
-        console.log(data);
-
         let diaMesAno = DateConverter.paraTexto(data);
-
-        console.log(diaMesAno);
-
-
-        console.log('controller funcionando');
 
         this._negociacoes.adiciona(this._criaNegociacao);
         this._mensagem.texto = 'Negociação adicionada com sucesso!';
-
-        console.log(this._negociacoes.paraArray());
-
-        console.log(this._inputData.value);
-        console.log(parseInt(this._inputQuantidade.value));
-        console.log(parseFloat(this._inputValor.value));
-
-        console.log(typeof (inputQuantidade.value));
-
 
         this._mensagemView.update(this._mensagem);  
 

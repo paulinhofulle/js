@@ -49,52 +49,8 @@
         <script src="app/ui/views/negociacoesView.js"></script>
         <script src="app/ui/models/Mensagem.js"></script>
         <script src="app/ui/views/mensagemView.js"></script>
+        <script src="app/util/ProxyFactory.js"></script>
 
-        <script>
-            const negociacao = new Proxy(new negociacao(new Date(), 2, 100), {
-                get: function(target, prop, receiver) {
-                    console.log(`a propriedade "${prop}" ciu na armadilha`);
-                    return target;
-                }, 
-
-                set(target, prop, value, receiver){
-                    console.log(`${prop} guarda ${target[prop]}, receberá ${value}`);
-                    return Reflect.set(target, prop, value);
-                }
-            });   
-
-
-            console.log(negociacao.quantidade);
-            console.log(negociacao.valor);
-            negociacao._quantidade = 10;
-            negociacao._valor = 200;
-
-            const negociacoes = new Proxy(new negociacoes(), {
-                get(target, prop, receiver){
-                    if(typeof(target[prop] == typeof(Function)) && ['adiciona', 'esvazia'].includes(prop)){
-                        return function(){
-                            console.log(`${prop} disparou a armadilha`);
-                            target[prop].apply(target, arguments);
-                        };
-                    }
-                    else{
-                        return target[prop];
-                    }
-                },
-
-                set(target, prop, value, receiver){
-                    console.log(`${prop} guarda ${target[prop]} receberá ${value}`);
-                    return Reflect.set(target, prop, value);
-                }
-            });
-            negociacoes.adiciona(new negociacao(new Date(), 1, 200));
-//            negociacoes.esvazia();
-
-            function exibeNomeCompleto(){
-                console.log(`Nome Completo:${arguments[0]} ${arguments[1]}}`);
-            }
-
-            exibeNomeCompleto('Paulo', 'Fulle');
-        </script>
+        
     </body>
 </html>
