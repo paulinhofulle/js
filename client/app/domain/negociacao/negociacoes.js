@@ -7,6 +7,7 @@ class negociacoes{
     }
 
     adiciona(negociacao){
+        console.log(this);
         this._negociacoes.push(negociacao);
 //        this._armadilha(this);
 
