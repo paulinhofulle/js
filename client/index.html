@@ -51,60 +51,24 @@
         <script src="app/ui/views/mensagemView.js"></script>
 
         <script>
-            let outroDia = new Date();
-            outroDia.setDate(22);
-            let n1 = new negociacao(outroDia, 10, 20);
+            const negociacao = new Proxy(new negociacao(new Date(), 2, 100), {
+                get: function(target, prop, receiver) {
+                    console.log(`a propriedade "${prop}" ciu na armadilha`);
+                    return target;
+                }, 
 
-            outroDia.setDate(30);
-
-            let volume = n1.volume;
-
-            n1.quantidade = 30;
-            console.log(n1.quantidade);
-
-            n1.data.setDate(15);
-
-            n1._quantidade = 50;
-            console.log(n1._quantidade);
-
-            console.log(n1);
-            console.log(volume);
-            console.log(n1.data);
-            console.log(n1.quantidade);
-            console.log(n1.valor);
-
-            let origem1 = {nome: 'Paulo'};
-            let origem2 = {sobrenome: 'Fulle'};
-
-            let copia = Object.assign({}, origem1, origem2);
-
-            console.log(copia);
-
-            let nome = 'Paulo';
-            let objeto = {nome: nome};
-            console.log(objeto);
-
-        
-            function getNome() {
-                var nome = 'Paulo';
-                alert(nome);
-
-                if(!nome){
-                    var nome = 'Paulo';
+                set(target, prop, value, receiver){
+                    console.log(`${prop} guarda ${target[prop]}, receberá ${value}`);
+                    target[prop] = value;
+                    return target[prop] == value; 
                 }
-            }
+            });   
 
-            getNome();
-            alert(nome);
 
-            for(let i = 1; i <= 100; i++){
-                alert(nome);
-                let nome = 'Paulo';
-                console.log(i);
-            }
-            alert(nome);
-            alert(i);
-
+            console.log(negociacao.quantidade);
+            console.log(negociacao.valor);
+            negociacao._quantidade = 10;
+            negociacao._valor = 200;
         </script>
     </body>
 </html>

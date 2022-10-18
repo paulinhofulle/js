@@ -8,7 +8,7 @@ class negociacoes{
 
     adiciona(negociacao){
         this._negociacoes.push(negociacao);
-        this._armadilha(this);
+//        this._armadilha(this);
 
     }
 
@@ -29,6 +29,6 @@ class negociacoes{
 
     esvazia(){
         this._negociacoes.length = 0;
-        this._armadilha(this);
+//        this._armadilha(this);
     }
 }

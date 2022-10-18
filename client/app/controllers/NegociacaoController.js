@@ -6,10 +6,10 @@ class NegociacaoController{
         this._inputData = $("#data");
         this._inputQuantidade = $("#quantidade");
         this._inputValor = $("#valor");
-        this._negociacoes = new negociacoes(function(model){
-            console.log(this);
-            this._negociacoesView.update(model);
-        });
+//        this._negociacoes = new negociacoes(function(model){
+//            console.log(this);
+//            this._negociacoesView.update(model);
+//        });
         this._negociacoesView = new this.negociacoesView("#negociacoes");
         this._negociacoesView.update(this._negociacoes);
 
